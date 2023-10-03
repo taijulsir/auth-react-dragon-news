@@ -2,6 +2,7 @@ import Header from "../SharedPages/Header";
 import LeftSideNav from "../SharedPages/LeftSideNav";
 import Navbar from "../SharedPages/Navbar";
 import RightSideNav from "../SharedPages/RightSideNav";
+import ShowNews from "../SharedPages/ShowNews";
 import BreakingNews from "./BreakingNews";
 
 
@@ -15,8 +16,8 @@ const Home = () => {
                 <div>
                     <LeftSideNav></LeftSideNav>
                 </div>
-                <div className=" md:col-span-2 px-3 mt-8">             
-                <h3 className="text-[#403F3F] font-semibold text-2xl mb-6 text-center"> Dragon News Home</h3>
+                <div className=" md:col-span-2 ">             
+                    <ShowNews></ShowNews>
                 </div>
                 <div>
                     <RightSideNav></RightSideNav>
