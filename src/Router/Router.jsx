@@ -6,6 +6,7 @@ import Carrer from "../Pages/Carrer/Carrer";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import NewsDetails from "../Pages/SharedPages/NewsDetails";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,13 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>
+            },
+            {
+                path: '/news/:id',
+                element: <NewsDetails></NewsDetails>,
+                loader: () => fetch('/news.json')
+                
+
             },
             {
                 path: "/about",

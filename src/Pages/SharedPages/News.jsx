@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
-import moment from 'moment';
+
 
 import { FaShareNodes, FaBookmark, FaEye } from "react-icons/fa6";
 import Rating from 'react-rating';
+import { Link } from 'react-router-dom';
 
 
 
 
 
 const News = ({ news }) => {
-    const { title, rating, author, total_view, image_url, details } = news
+    const { _id, title, rating, author, total_view, image_url, details } = news
     console.log(news)
     return (
         <div className='bg-[#FFF] border shadow-xl '>
@@ -19,7 +20,7 @@ const News = ({ news }) => {
                     <img className="h-[40px] rounded-full" src={author.img} alt="" />
                     <div>
                         <h3 className='text-lg text-[#403F3F] font-semibold'>{author.name}</h3>
-                        <p>{moment().format("YYYY- M-D ")} </p>
+                        <p>{author.published_date} </p>
                     </div>
                 </div>
 
@@ -33,7 +34,17 @@ const News = ({ news }) => {
             <div className='px-5'>
                 <h1 className='text-xl font-bold text-[#403F3F] pb-5'>{title}</h1>
                 <img className='mb-8' src={image_url} alt="" />
-                <p className='text-[#706F6F] mb-5'>{details}</p>
+                <p className='text-[#706F6F] mb-5'>
+                    
+                </p>
+                    {
+                        details.length >200 ? <p> {details.slice(0,200)} <Link 
+                        to={`/news/${_id}`}
+                        className=' text-red-700 font-semibold'>
+                        Read More ...
+                        </Link> </p>
+                        : <p> {details} </p>
+                    }
                 <hr />
                 <div className='flex justify-between my-5'>
                     <p>
