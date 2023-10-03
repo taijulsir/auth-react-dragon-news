@@ -22,7 +22,7 @@ const NewsDetails = () => {
                 <div className="md:col-span-3 px-4 mt-8 bg-[#FFF] rounded-md shadow-lg">
                     <h1 className='text-xl font-bold text-[#403F3F] pb-5 '>News Details  </h1>
                     <div className="space-y-7">
-                        <img className='mb-8' src={news.image_url} alt="" />
+                        <img className='mb-8 lg:w-[928px] lg:h-[517px]' src={news.image_url} alt="" />
                         <h3 className="text-3xl font-bold "> {news.title} </h3>
                         <p className='text-[#706F6F] text-xl my-5'>
                             {news.details}
@@ -33,6 +33,7 @@ const NewsDetails = () => {
                     </div>
 
                     <div className="mt-10">
+                        <h3 className="text-2xl font-semibold mb-6">Editor Inshots</h3>
                         <div className=" grid grid-cols-3">
                             <div className="space-y-5">
                                 <img src={image1} alt="news" />

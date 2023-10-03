@@ -1,7 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import userLogo from "../../assets/user.png"
+import AuthHook from "../../CustomHook/AuthHook";
 
 const Navbar = () => {
+    const { user,signOutUser } = AuthHook()
+    const handleSignOut = () => {
+        signOutUser()
+    }
     const navLinks =
         <>
             <li className="mr-3 text-[#706F6F] text-lg"><NavLink to="/">Home</NavLink></li>
@@ -33,9 +38,14 @@ const Navbar = () => {
                             <img src={userLogo} />
                         </div>
                     </label>
-                    <Link to="/login">
-                        <button className="btn bg-[#403F3F] text-white ">Login</button>
-                    </Link>
+                    {
+                        user ?
+                         <button onClick={handleSignOut} className="btn bg-[#403F3F] text-white ">Sign Out</button>
+                         :
+                         <Link to="/login">
+                            <button className="btn bg-[#403F3F] text-white ">Login</button>
+                        </Link>
+                    }
                 </div>
             </div>
         </div>
