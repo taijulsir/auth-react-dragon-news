@@ -5,6 +5,7 @@ import qzone2 from "../../assets/qZone2.png"
 import qzone3 from "../../assets/qZone3.png"
 import bg from "../../assets/bg.png"
 import AuthHook from "../../CustomHook/AuthHook";
+import toast, { Toaster } from 'react-hot-toast';
 const RightSideNav = () => {
 
     const {googleLogin, githubLogin} = AuthHook();
@@ -13,6 +14,7 @@ const RightSideNav = () => {
         .then(result => {
             const users = result.user
             console.log(users)
+            toast.success('Succesfully Login')
         })
         .catch(error => {
             const errorMessage = error.message;
@@ -62,6 +64,7 @@ const RightSideNav = () => {
                 <button className="text-white bg-[#D72050] px-5 py-4" >Learn More</button>
                
             </div>
+            <Toaster />
 
         </div>
     );

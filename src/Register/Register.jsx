@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
     
-    const {createUser, profileUpdate,verificationMail} = AuthHook()
+    const {createUser, profileUpdate,verificationMail,signOutUser} = AuthHook()
     const [showPassword,setShowPassword] = useState(false)
 
     const handleRegister =(e) => {
@@ -53,6 +53,8 @@ const Register = () => {
                 const errorMessage = error.message;
                 toast.error(errorMessage);
             })
+
+            signOutUser();
 
         })
         .catch(error => {

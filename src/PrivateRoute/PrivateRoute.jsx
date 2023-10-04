@@ -3,6 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import AuthHook from "../CustomHook/AuthHook";
 
 
+
 const PrivateRoute = ({children}) => {
     const {user,loading} = AuthHook()
     // private  route ar kothay jete chaichi seta janar jnnno location..
@@ -16,7 +17,8 @@ const PrivateRoute = ({children}) => {
     }
 
     // location ar pathname ta state ar mdde sate kore dibo
-    return <Navigate state={location.pathname} to="/login"></Navigate>
+    return <Navigate state={location.pathname} to="/login"> </Navigate>
+     
 };
 
 export default PrivateRoute;

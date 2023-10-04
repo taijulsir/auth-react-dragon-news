@@ -19,7 +19,7 @@ const ShowNews = () => {
                 }
             </div>
 
-            <div className={newsLength === showNews.length && 'hidden'}>
+            <div className={newsLength === showNews.length && "hidden"} style={{display:"flex", justifyContent: "center", marginTop:20}}>
                 <div className="flex items-center justify-center my-5">
                 <button className="bg-[#403F3F] text-white font-bold btn" onClick={()=>setNewsLength(showNews.length)}>Show More</button>
                 </div>

@@ -8,6 +8,8 @@ import BookmarksNews from "./BookmarksNews";
 const Bookmarks = () => {
     const news = useLoaderData();
     const [booksmarks,setBookmarks]  = useState([])
+    const [bookmarksLength,setbookmarksLength] = useState(4)
+    const [allClicked,setAllClicked] = useState(false)
     useEffect(() => {
         const storedNewsIds = getStoredNewsItem();
         if(news.length>0) {
@@ -18,6 +20,10 @@ const Bookmarks = () => {
         
     },[news])
 
+    const handleSeeAllBtn = () => {
+        setbookmarksLength(booksmarks.length)
+        setAllClicked(true)
+    }
    
     return (
         <div>
@@ -27,10 +33,16 @@ const Bookmarks = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
 
                     {
-                        booksmarks.map(bookmark => <BookmarksNews key={bookmark._id} bookmark={bookmark}></BookmarksNews>)
+                        booksmarks.slice(0,bookmarksLength).map(bookmark => <BookmarksNews key={bookmark._id} bookmark={bookmark}></BookmarksNews>)
                     }
 
             </div>
+
+            <div className={ booksmarks.length >4 && !allClicked ? '' : 'hidden'}>
+           <div className="text-center mt-10">
+           <button onClick={handleSeeAllBtn} className="btn bg-[#403F3F] text-white" > See All</button>
+           </div>
+        </div>
         </div>
     );
 };
