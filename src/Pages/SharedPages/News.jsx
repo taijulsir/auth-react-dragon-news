@@ -1,17 +1,15 @@
 /* eslint-disable react/prop-types */
-
-
 import { FaShareNodes, FaBookmark, FaEye } from "react-icons/fa6";
 import Rating from 'react-rating';
 import { Link } from 'react-router-dom';
-
-
-
-
-
-const News = ({ news }) => {
+import { saveNewsItem } from "../../LocalStorage/Localstorage";
+const News = ({ news }) => { 
     const { _id, title, rating, author, total_view, image_url, details } = news
-    console.log(news)
+    
+    // handle bookmarks button
+     const handleBookmark = () => {
+        saveNewsItem(news)
+    }
     return (
         <div className='bg-[#FFF] border shadow-xl '>
             {/* author Section */}
@@ -25,8 +23,8 @@ const News = ({ news }) => {
                 </div>
 
                 <div className='text-xl flex gap-3  text-[#706F6F]'>
-                    <FaBookmark></FaBookmark>
-                    <FaShareNodes></FaShareNodes>
+                    <button onClick={handleBookmark}><FaBookmark></FaBookmark> </button>
+                     <button><FaShareNodes></FaShareNodes></button>
                 </div>
             </div>
 

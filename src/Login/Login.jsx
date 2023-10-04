@@ -1,13 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Pages/SharedPages/Navbar";
 import AuthHook from "../CustomHook/AuthHook";
+import { useRef } from "react";
 
 
 
 const Login = () => {
-    const {signIn} = AuthHook();
+    const {signIn,resetPassword} = AuthHook();
     const location = useLocation()
     const navigate = useNavigate()
+    const emailRef = useRef();
 
     const handleLogin =(e) => {
         e.preventDefault();
@@ -28,6 +30,26 @@ const Login = () => {
             console.log(errorMessage);
         })
     }
+
+    const handleReset =(e) => {
+        e.preventDefault();
+        const email = emailRef.current.value;
+    if(!email){ 
+
+        return  alert('Please enter your email')
+    }
+
+    resetPassword(email)
+    .then(results => {
+        console.log(results);
+    })
+    .catch(error => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+    })
+    }
+        
+
     return (
         <div>
             <Navbar></Navbar>
@@ -37,7 +59,7 @@ const Login = () => {
                    <form onSubmit={handleLogin} className="mt-12 px-24">
                         <div>
                             <p className="text-xl font-semibold text-[#403F3F] pb-4">Email Account</p>
-                            <input className="w-full bg-[#F3F3F3] p-5 " type="email" name="email" id="email" placeholder="Enter your email address" required/>
+                            <input className="w-full bg-[#F3F3F3] p-5 " type="email" name="email" id="email" ref={emailRef} placeholder="Enter your email address" required/>
                         </div>
                         <div>
                             <p className="text-xl font-semibold text-[#403F3F] pt-6 pb-4 ">Password</p>
@@ -45,6 +67,9 @@ const Login = () => {
                         </div>
                         <div>
                             <input className="btn bg-[#403F3F] w-full text-[#FFFFFF]" type="submit" value="Login"/>
+                        </div>
+                        <div>
+                            <Link onClick={handleReset} className="text-base text-[#403F3F] font-semibold text-center underline mt-5" href="">Forget Password</Link>
                         </div>
                         <div className="py-7">
                             <p className="text-base text-[#403F3F] font-semibold text-center">Don`t have an account? <Link className=" text-red-600" to="/register">Register</Link></p>

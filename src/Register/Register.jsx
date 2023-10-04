@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Pages/SharedPages/Navbar";
 import AuthHook from "../CustomHook/AuthHook";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { useState } from "react";
+
 
 
 const Register = () => {
     
     const {createUser, profileUpdate,verificationMail} = AuthHook()
+    const [showPassword,setShowPassword] = useState(false)
 
     const handleRegister =(e) => {
         e.preventDefault();
@@ -14,11 +18,20 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(name,photoUrl,email, password);
+
+        // password validation
+        if(password.length < 8){
+            return alert('Password must be at least 8 characters long')
+        }
+        if(!/[A-Z!@#$%^&*()_+]/g.test(password)){
+            return alert('Password must contain at least one uppercase letter and specain characters')
+        }
         createUser(email, password)
         .then(results => {
             const result = results.user;
             console.log(result)
         
+            // profile update with name and picture
             profileUpdate(name,photoUrl)
             .then(results => {
                 console.log(results)
@@ -27,9 +40,14 @@ const Register = () => {
                 console.log(errors)
             })
 
+            //  verification email validation
             verificationMail()
             .then((result) => {
-                console.log(result);
+                console.log(result)
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
             })
 
         })
@@ -57,9 +75,18 @@ const Register = () => {
                             <p className="text-xl font-semibold text-[#403F3F] pb-4 pt-6">Email Account</p>
                             <input className="w-full bg-[#F3F3F3] p-5 " type="email" name="email" id="email" placeholder="Enter your email address" required/>
                         </div>
-                        <div>
+                        <div className=" relative">
                             <p className="text-xl font-semibold text-[#403F3F] pt-6 pb-4 ">Password</p>
-                            <input className="w-full bg-[#F3F3F3] p-5 mb-7 " type="password" name="password" id="password" placeholder="Enter your password" required/>
+                            <input className="w-full bg-[#F3F3F3] p-5 mb-7 " type={showPassword ? "text" :"password" }
+                            name="password"
+                            id="password" 
+                            placeholder="Enter your password" required/>
+                            <button className="absolute mt-5 right-3" onClick={() => setShowPassword(!showPassword)}>
+                                {
+                                    
+                                    showPassword? <FaEye className="text-2xl text-[#403F3F]"></FaEye> : <FaEyeSlash className="text-2xl text-[#403F3F]"></FaEyeSlash>
+                                }
+                            </button>
                         </div>
                         <div>
                             <input className="btn bg-[#403F3F] w-full text-[#FFFFFF]" type="submit" value="Register"/>

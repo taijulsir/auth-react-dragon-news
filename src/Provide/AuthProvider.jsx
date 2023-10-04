@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import { createContext, useEffect, useState } from "react";
-import {  GithubAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithPopup, updateProfile } from "firebase/auth";
+import {  GithubAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithPopup, updateProfile } from "firebase/auth";
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import {  signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -44,6 +44,9 @@ const AuthProvider = ({children}) => {
     const verificationMail = () => {
         return sendEmailVerification(auth.currentUser);
     }
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth,email);
+    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged (auth, currrentUser => {
@@ -53,7 +56,7 @@ const AuthProvider = ({children}) => {
         return () => unsubscribe;
     },[])
     
-    const authInfo = {user,loading, createUser,signIn,signOutUser ,googleLogin,githubLogin,profileUpdate,verificationMail};
+    const authInfo = {user,loading, createUser,signIn,signOutUser ,googleLogin,githubLogin,profileUpdate,verificationMail,resetPassword};
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
