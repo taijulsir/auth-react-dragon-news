@@ -37,11 +37,14 @@ const News = ({ news }) => {
                     
                 </p>
                     {
-                        details.length >200 ? <p> {details.slice(0,200)} <Link 
+                        details.length >200 ?
+                        <p> {details.slice(0,200)}
+                        <Link 
                         to={`/news/${_id}`}
                         className=' text-red-700 font-semibold'>
                         Read More ...
                         </Link> </p>
+                        
                         : <p> {details} </p>
                     }
                 <hr />
@@ -66,6 +69,7 @@ const News = ({ news }) => {
                     </div>
                 </div>
             </div>
+           
         </div>
     );
 };

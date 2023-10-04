@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Pages/SharedPages/Navbar";
 import AuthHook from "../CustomHook/AuthHook";
 import { useRef } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -17,17 +18,22 @@ const Login = () => {
         const password = e.target.password.value;
         console.log(email, password);
 
+        if(!email.emailVerified){
+            toast.error("Please verify your email")
+            return;
+        }
         signIn(email, password)
         .then(results => {
             const result = results.user;
             console.log(result)
+            toast.success('Succesfully Login')
 
             // after login 
             navigate(location?.state? location.state : '/')
         })
         .catch(err => {
             const errorMessage = err.message;
-            console.log(errorMessage);
+            toast.error(errorMessage);
         })
     }
 
@@ -36,16 +42,18 @@ const Login = () => {
         const email = emailRef.current.value;
     if(!email){ 
 
-        return  alert('Please enter your email')
+        toast.error("Provide your mail")
+        return;
     }
 
     resetPassword(email)
     .then(results => {
         console.log(results);
+        toast.success('Succesfully Reset Password')
     })
     .catch(error => {
         const errorMessage = error.message;
-        console.log(errorMessage);
+        toast.error(errorMessage);
     })
     }
         
@@ -76,6 +84,7 @@ const Login = () => {
                         </div>
                    </form>
             </div>
+            <Toaster />
         </div>
     );
 };

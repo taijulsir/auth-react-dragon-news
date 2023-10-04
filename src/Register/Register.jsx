@@ -3,6 +3,7 @@ import Navbar from "../Pages/SharedPages/Navbar";
 import AuthHook from "../CustomHook/AuthHook";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -21,10 +22,12 @@ const Register = () => {
 
         // password validation
         if(password.length < 8){
-            return alert('Password must be at least 8 characters long')
+            toast.error('Password must be at least 8 characters long')
+            return;
         }
         if(!/[A-Z!@#$%^&*()_+]/g.test(password)){
-            return alert('Password must contain at least one uppercase letter and specain characters')
+            toast.error('Password must contain at least one uppercase letter and specain characters')
+            return; 
         }
         createUser(email, password)
         .then(results => {
@@ -44,16 +47,17 @@ const Register = () => {
             verificationMail()
             .then((result) => {
                 console.log(result)
+                toast.success('Succesfully Created.Now,Verify your email')
             })
             .catch(error => {
                 const errorMessage = error.message;
-                console.log(errorMessage);
+                toast.error(errorMessage);
             })
 
         })
         .catch(error => {
             const errorMessage = error.message;
-            console.log(errorMessage);
+            toast.error(errorMessage);
         })
     }
     return (
@@ -96,6 +100,7 @@ const Register = () => {
                         </div>
                    </form>
             </div>
+             <Toaster />
         </div>
     );
 };
