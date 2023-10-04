@@ -15,7 +15,7 @@ const ShowNews = () => {
             <h3 className="text-[#403F3F] font-semibold text-2xl mb-6 text-center"> Dragon News Home</h3>
             <div className="flex flex-col gap-5">
                 {
-                    showNews.slice(0,newsLength).map(news => <News key={news.id} news = {news}></News>)
+                    showNews.slice(0,newsLength).map(news => <News key={news._id} news = {news}></News>)
                 }
             </div>
 
