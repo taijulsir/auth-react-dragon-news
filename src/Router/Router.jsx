@@ -8,6 +8,7 @@ import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import NewsDetails from "../Pages/SharedPages/NewsDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Bookmarks from "../Pages/Bookmarks/Bookmarks";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "/carrer",
                 element:<Carrer></Carrer>
+            },
+            {
+                path: "/bookmarks",
+                element: <PrivateRoute><Bookmarks></Bookmarks></PrivateRoute>
             },
             {
                 path: "/login",

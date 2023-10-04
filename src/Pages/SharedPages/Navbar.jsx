@@ -12,6 +12,7 @@ const Navbar = () => {
             <li className="mr-3 text-[#706F6F] text-lg"><NavLink to="/">Home</NavLink></li>
             <li className="mr-3 text-[#706F6F] text-lg"><NavLink to="/about">About</NavLink></li>
             <li className="mr-3 text-[#706F6F] text-lg"><NavLink to="/carrer">Carrer</NavLink></li>
+            <li className="mr-3 text-[#706F6F] text-lg"><NavLink to="/bookmarks">Bookmarks</NavLink></li>
 
         </>
     return (

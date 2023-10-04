@@ -5,7 +5,7 @@ import AuthHook from "../CustomHook/AuthHook";
 
 const Register = () => {
     
-    const {createUser} = AuthHook()
+    const {createUser, profileUpdate,verificationMail} = AuthHook()
 
     const handleRegister =(e) => {
         e.preventDefault();
@@ -18,6 +18,20 @@ const Register = () => {
         .then(results => {
             const result = results.user;
             console.log(result)
+        
+            profileUpdate(name,photoUrl)
+            .then(results => {
+                console.log(results)
+            })
+            .catch(errors => {
+                console.log(errors)
+            })
+
+            verificationMail()
+            .then((result) => {
+                console.log(result);
+            })
+
         })
         .catch(error => {
             const errorMessage = error.message;

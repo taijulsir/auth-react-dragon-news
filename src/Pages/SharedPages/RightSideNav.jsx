@@ -4,8 +4,21 @@ import qzone1 from "../../assets/qZone1.png"
 import qzone2 from "../../assets/qZone2.png"
 import qzone3 from "../../assets/qZone3.png"
 import bg from "../../assets/bg.png"
+import AuthHook from "../../CustomHook/AuthHook";
 const RightSideNav = () => {
 
+    const {googleLogin, githubLogin} = AuthHook();
+    const handlePopupLogin = (media) => {
+        media()
+        .then(result => {
+            const users = result.user
+            console.log(users)
+        })
+        .catch(error => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+        })
+    }
     const bgStyle = {
         backgroundImage: `url(${bg})`,
         backgroundRepeat: "no-repeat",
@@ -18,9 +31,9 @@ const RightSideNav = () => {
             {/* login with section */}
             <div className="px-3 mt-8">
                 <h3 className="text-[#403F3F] font-semibold text-2xl mb-6">Login With</h3>
-                <button className="btn w-full border border-blue-500 text-sky-700 mb-4 ">
+                <button onClick={()=> handlePopupLogin(googleLogin)} className="btn w-full border border-blue-500 text-sky-700 mb-4 ">
                     <FaGoogle></FaGoogle>Login With Google</button>
-                <button className="btn w-full border  "> <FaGithub></FaGithub>Login With Github</button>
+                <button onClick={() => handlePopupLogin(githubLogin)} className="btn w-full border "> <FaGithub></FaGithub>Login With Github</button>
             </div>
 
             {/* Find Us Section */}
